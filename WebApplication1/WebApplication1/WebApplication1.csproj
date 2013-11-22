@@ -59,6 +59,9 @@
   <ItemGroup>
     <Content Include="JavaScript1.js" />
     <Content Include="JavaScript2.js" />
+    <Content Include="JavaScript3.js" />
+    <Content Include="JavaScript4.js" />
+    <Content Include="JavaScript5.js" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
