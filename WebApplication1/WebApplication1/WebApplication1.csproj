@@ -60,6 +60,7 @@
     <Content Include="JavaScript1.js" />
     <Content Include="JavaScript10.js" />
     <Content Include="JavaScript11.js" />
+    <Content Include="JavaScript12.js" />
     <Content Include="JavaScript2.js" />
     <Content Include="JavaScript3.js" />
     <Content Include="JavaScript4.js" />
