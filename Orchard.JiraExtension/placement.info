@@ -1,0 +1,10 @@
+<Placement>
+  <Place Parts_Faq_Edit="Content:2"/>
+  <Place Parts_Faq="Content:2"/>
+  <Place Parts_FaqType_Edit="Content:2"/>
+  <Place Parts_FaqType="Content:2"/>
+  <Place Parts_FaqWidget="Content:2"/>
+  <Place Parts_FaqWidget_Edit="Content:2"/>
+  <Place Parts_LastFaqWidget="Content:2"/>
+  <Place Parts_LastFaqWidget_Edit="Content:2"/>
+</Placement>
