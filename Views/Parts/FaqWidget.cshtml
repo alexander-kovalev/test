@@ -1,13 +1,35 @@
 @{
     //Script.Include("Orchard.JiraExtension.js");
+    Script.Include("matreshka.all.js");
     Script.Require("jQuery");
     }
-sdfgsdfgsdfgsdfgsdfg
+
 <textarea id="oje_primary_text"></textarea>
 <button id="oje_parse_primary_text" type="button" onclick="OJE.ParseText('#oje_primary_text')"></button>
-
+<table id="oje_issues"> 
+    <tr>
+        <th>
+            Issue number
+        </th>
+        <th>
+            Issue token
+        </th>
+        <th>
+            Issue title
+        </th>
+    </tr>
+</table>
 
 <script type="text/javascript">
+
+    //var Issue = Class({
+    //    'extends': MK.Object,
+    //    constructor: function () {
+    //        MyClass.parent.constructor(this, arguments);
+    //    },
+    //    method: function () { }
+    //});
+
     var OJE = {};
     OJE.Issues = new Array();
     OJE.IssuePattern = "";
@@ -19,24 +41,43 @@ sdfgsdfgsdfgsdfgsdfg
             for (var i = 0; i < textToParse.match(issueRegExp).length; i++) {
                 var issueUrl = textToParse.match(issueRegExp)[i];
                 var issueToken = issueUrl.match(issueTokenRegExp)[0];
-                OJE.Issues[i].issueUrl = issueUrl;
-                OJE.Issues[i].issueToken = issueToken;
+                var issue = new Matreshka.Object();
+                issue.jset({
+                    url: issueUrl,
+                    token: issueToken
+                });
+                OJE.Issues[i] = issue;
+                var issueRowId = "oje_issue_" + i;
+                $("#oje_issues").append($("<tr id='" + issueRowId + "'>"));
+                $("#" + issueRowId).append($("<td>").text(i));
+                $("#" + issueRowId).append($("<td id='" + issueRowId + "_token'>").text(issueToken));
+                $("#" + issueRowId).append($("<td id='" + issueRowId + "_title'>"));
+                issue.bindElement('title', '#'+issueRowId+"_title");
+                issue.on('change:title', function (bindedElement, val) {
+                    bindedElement.text(val);
+                });
             }
+            OJE.Render()
         }
     };
 
     OJE.Render = function() {
         for (var i = 0; i < OJE.Issues.length; i++) {
             $.ajax({
-                url: '/ajax/example.html',             
+                method:'GET',
+                url: 'https://issues.belitsoft.com/rest/api/2/issue/'+OJE.Issues[i].token,
                 dataType : "json",                     
                 success: function (data, textStatus) { 
                     $.each(data, function(i, val) {    
-                       
+                        OJE.Issues[i].title = data;
                     });
                 } 
             });
         }
     };
+
+    //$(document).ready(function () {
+
+    //})
 
 </script>
